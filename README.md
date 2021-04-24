@@ -59,3 +59,10 @@ All results from different batches of test are stored in [calibration_outputs](h
 <img src="./doc/fisheye_model.png" title="">
 </p>
 <br/>
+
+Now we just have to project the pixels of interest from distorted image to the undistorted one using the [projection_fisheye_to_pinhole](https://github.com/robotique-ecam/new_camera_calibration/blob/main/projection_fisheye_to_pinhole.py) script which gives the following results:
+
+<p align="center">
+<img src="./doc/pinhole_fisheye_projection.png" title="">
+</p>
+<br/>
