@@ -5,6 +5,9 @@ import numpy as np
 import os
 import glob
 
+def get_repo_directory():
+    return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+
 # Defining the dimensions of checkerboard
 CHECKERBOARD = (6, 9)
 criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
@@ -23,7 +26,7 @@ prev_img_shape = None
 
 # Extracting path of individual image stored in a given directory
 images = glob.glob(
-    "../calibration_imgs/pinhole_model_from_fisheye_undistrorded_pictures_set/*.jpg"
+    get_repo_directory() + "/calibration_imgs/pinhole_model_from_fisheye_undistrorded_pictures_set/*.jpg"
 )
 
 for fname in images:

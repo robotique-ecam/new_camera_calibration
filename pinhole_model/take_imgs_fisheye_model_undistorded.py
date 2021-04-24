@@ -1,6 +1,10 @@
 import cv2
 import numpy as np
+import os
 from datetime import datetime
+
+def get_repo_directory():
+    return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 cam = cv2.VideoCapture(2)
 cam.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc("M", "J", "P", "G"))
@@ -73,7 +77,7 @@ while True:
         break
     elif (datetime.now() - now).total_seconds() > 2:
         # takes pictures every 2 second
-        img_name = "../calibration_imgs/pinhole_model_from_fisheye_undistrorded_pictures_set/calibration_image_{}.jpg".format(
+        img_name = get_repo_directory() + "/calibration_imgs/pinhole_model_from_fisheye_undistrorded_pictures_set/calibration_image_{}.jpg".format(
             img_counter
         )
         cv2.imwrite(img_name, frame)

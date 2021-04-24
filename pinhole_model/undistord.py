@@ -2,6 +2,9 @@ import numpy as np
 import cv2
 import os
 
+def get_repo_directory():
+    return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+
 # Define Camera Matrix
 camera_matrix = np.array(
     [
@@ -17,7 +20,7 @@ distortion_coefficients = np.array(
 )
 
 frame = cv2.imread(
-    "../undistorded_results/200_pictures_fisheye/board_overview_undistord_balance_0_3.jpg"
+    get_repo_directory() + "/undistorded_results/200_pictures_fisheye/board_overview_undistord_balance_0_3.jpg"
 )
 
 distorted_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -38,10 +41,10 @@ undistorted_frame = cv2.undistort(
 cropped_frame = undistorted_frame[roi_y : roi_y + roi_h, roi_x : roi_x + roi_w]
 
 cv2.imwrite(
-    "./test_image/pinhole_correction_over_fisheye_model/board_overview_undistord.jpg",
+    get_repo_directory() + "/undistorded_results/pinhole_correction_over_fisheye_model/board_overview_undistord.jpg",
     undistorted_frame,
 )
 cv2.imwrite(
-    "./test_image/pinhole_correction_over_fisheye_model/board_overview_undistord_cropped.jpg",
+    get_repo_directory() + "/undistorded_results/pinhole_correction_over_fisheye_model/board_overview_undistord_cropped.jpg",
     cropped_frame,
 )

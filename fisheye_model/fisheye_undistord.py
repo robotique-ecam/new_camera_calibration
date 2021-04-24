@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
+import os
 
+def get_repo_directory():
+    return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 # You should replace these 3 lines with the output in calibration step
 DIM = (3840, 2160)
@@ -42,6 +45,8 @@ def undistort(img_path, balance=0.0, dim2=None, dim3=None):
     new_K = cv2.fisheye.estimateNewCameraMatrixForUndistortRectify(
         scaled_K, D, dim2, np.eye(3), balance=balance
     )
+    print("new_K:")
+    print(new_K)
     map1, map2 = cv2.fisheye.initUndistortRectifyMap(
         scaled_K, D, np.eye(3), new_K, dim3, cv2.CV_16SC2
     )
@@ -51,11 +56,11 @@ def undistort(img_path, balance=0.0, dim2=None, dim3=None):
     return undistorted_img
 
 
-img = undistort("../undistorded_results/board_overview.jpg", balance=0.3)
+img = undistort(get_repo_directory() + "/undistorded_results/board_overview.jpg", balance=0.3)
 resized = cv2.resize(img.copy(), (1421, 800), interpolation=cv2.INTER_AREA)
 cv2.imshow("undistorted", resized)
 cv2.imwrite(
-    "../undistorded_results/200_pictures_fisheye/board_overview_undistord_balance_0_3.jpg",
+    get_repo_directory() + "/undistorded_results/200_pictures_fisheye/board_overview_undistord_balance_0_3.jpg",
     img,
 )
 while True:

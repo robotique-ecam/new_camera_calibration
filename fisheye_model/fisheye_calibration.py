@@ -4,6 +4,9 @@ import numpy as np
 import os
 import glob
 
+def get_repo_directory():
+    return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+
 CHECKERBOARD = (6, 9)
 
 subpix_criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.1)
@@ -20,7 +23,7 @@ _img_shape = None
 objpoints = []  # 3d point in real world space
 imgpoints = []  # 2d points in image plane.
 
-images = glob.glob("../calibration_imgs/fisheye_model_pictures_set/*.jpg")
+images = glob.glob(get_repo_directory() + "/calibration_imgs/fisheye_model_pictures_set/*.jpg")
 
 for fname in images:
     img = cv2.imread(fname)
